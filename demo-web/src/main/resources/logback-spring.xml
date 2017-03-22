@@ -55,6 +55,9 @@
         </rollingPolicy>
     </appender>
 
+    <logger name="org.springframework.web" level="INFO" />
+    <logger name="org.reflections.Reflections" level="ERROR" />
+    <logger name="com.alibaba.dubbo" level="ERROR" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
