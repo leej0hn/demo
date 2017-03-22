@@ -1,0 +1,21 @@
+spring.thymeleaf.cache: false
+
+logging:
+  file: ${user.home}/logs/web.log
+
+web:
+ ips: /*
+
+server.port: 8082
+
+spring:
+ datasource:
+   url: jdbc:mysql://127.0.0.1:3306/piwik?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+   username:
+   password: 
+   driver-class-name: com.mysql.jdbc.Driver
+   type: com.alibaba.druid.pool.DruidDataSource
+
+# mybatis
+mybatis:
+  configLocation: classpath:mybatis-config.xml

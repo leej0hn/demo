@@ -1,0 +1,10 @@
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+
+DROP TABLE IF EXISTS `test`;
+CREATE TABLE `test` (
+  `name` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

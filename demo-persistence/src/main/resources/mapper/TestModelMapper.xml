@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定工作空间，要与接口名相同-->
+<mapper namespace="io.communet.demo.persistence.mapper.TestModelMapper">
+
+    <!-- 若不需要自动返回主键，将useGeneratedKeys="true" keyProperty="id"去掉即可(当然如果不需要自动返回主键，直接用注解即可) -->
+    <insert id="insert" parameterType="Test" >
+        <![CDATA[
+       INSERT INTO test
+       (
+           name,
+           age
+       )
+       VALUES
+       (
+           #{name, jdbcType=VARCHAR},
+           #{age, jdbcType=INTEGER}
+       )
+       ]]>
+    </insert>
+
+</mapper>
