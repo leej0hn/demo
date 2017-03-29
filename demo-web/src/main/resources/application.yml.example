@@ -5,6 +5,7 @@ logging:
 
 web:
  ips: /*
+ tokenHeader: 5ade8aea648647bda5c10a6fb927e298
 
 server.port: 8082
 

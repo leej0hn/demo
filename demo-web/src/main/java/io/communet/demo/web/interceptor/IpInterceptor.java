@@ -1,6 +1,8 @@
 package io.communet.demo.web.interceptor;
 
+import io.communet.demo.web.configuration.WebConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,8 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class IpInterceptor implements HandlerInterceptor {
 
-    @Value("${web.ips:}")
-    private String ips;
+    private static final String TOKEN_HEADER = "token_header";
+    @Autowired
+    private WebConfig config;
 
     public IpInterceptor(){
     }
@@ -28,7 +31,7 @@ public class IpInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        if( ips.equals("/*") || ips.contains(request.getRemoteHost()) ){
+        if( config.getIps().equals("/*") || config.getIps().contains(request.getRemoteHost()) || (  request.getHeader(TOKEN_HEADER)!= null && request.getHeader(TOKEN_HEADER).equals(config.getTokenHeader()) ) ){
             return true;
         }
         return false;
