@@ -28,6 +28,21 @@ public class OkHttpUtil {
         return resutl(request);
     }
 
+    public static String upload(byte[] content, String uploadUrl) throws IOException {
+        logger.info("OkHttpUtil.upload url : " + uploadUrl);
+        RequestBody fileBody = RequestBody.create(MediaType.parse("text/xml "), content);
+        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("file", "content", fileBody)
+                .build();
+        Request request = new Request.Builder()
+                .url(uploadUrl)
+                .post(requestBody)
+                .build();
+        Response response;
+        response = client.newCall(request).execute();
+        return response.body().string();
+    }
+
     public static String upload(File file, String uploadUrl) throws IOException {
         logger.info("OkHttpUtil.upload url : " + uploadUrl);
         RequestBody fileBody = RequestBody.create(MediaType.parse("text/xml "), file);
