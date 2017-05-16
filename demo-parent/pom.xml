@@ -28,7 +28,6 @@
         <lombok.version>1.14.8</lombok.version>
         <okhttp.version>3.5.0</okhttp.version>
 
-        <!-- g7-mongo-utils-->
         <jcseg.version>1.9.9</jcseg.version>
         <jieba.version>1.0.2</jieba.version>
         <jsoup.version>1.7.3</jsoup.version>
@@ -76,6 +75,11 @@
             <dependency>
                 <groupId>io.communet</groupId>
                 <artifactId>demo-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.communet</groupId>
+                <artifactId>demo-persistence-mongo</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
