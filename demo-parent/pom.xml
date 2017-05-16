@@ -43,7 +43,6 @@
         <webCollector.version>2.32</webCollector.version>
 
 
-        <!-- g7-mongo-crawler -->
         <webmagic.version>0.5.3</webmagic.version>
         <jcseg.version>1.9.9</jcseg.version>
         <jieba.version>1.0.2</jieba.version>
