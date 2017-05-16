@@ -15,6 +15,7 @@
         <module>demo-web</module>
         <module>demo-service-api</module>
         <module>demo-service</module>
+        <module>demo-persistence-mongo</module>
     </modules>
 
     <name>demo</name>

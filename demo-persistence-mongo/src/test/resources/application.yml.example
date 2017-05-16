@@ -1,0 +1,10 @@
+logging:
+  file: ${user.home}/logs/demo-mongo-persistence.log
+
+#MongoProperties
+spring.data.mongodb:
+  host: localhost
+  port: 27017
+  database: demo
+ # username:
+ # password:
