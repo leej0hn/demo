@@ -4,9 +4,4 @@ logging:
 dubbo:
   name: demo-service
   registry: zookeeper://127.0.0.1:2181
-  port: -1
-  timeout: 10000
-  threads: 100
-  heartBeats: 10000
-  mode: consumer
   configPath: E:\project_communet_io\demo\demo-service\src\main\resources\application.yml

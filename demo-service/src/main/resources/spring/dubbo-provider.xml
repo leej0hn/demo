@@ -10,6 +10,7 @@
         <util:properties id="application" location="file:${dubbo.configPath}" local-override="true"/>
 
         <dubbo:application name="#{application.name}" logger="slf4j"/>
+        <dubbo:protocol  port="-1"></dubbo:protocol>
         <dubbo:registry address="#{application.registry}"></dubbo:registry>
 
         <dubbo:service version="1.0.0" retries="0" interface="io.communet.demo.service.TestService" ref="testServiceImpl"/>
