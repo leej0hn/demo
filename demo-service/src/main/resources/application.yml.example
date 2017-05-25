@@ -4,4 +4,4 @@ logging:
 dubbo:
   name: demo-service
   registry: zookeeper://127.0.0.1:2181
-  configPath: E:\project_communet_io\demo\demo-service\src\main\resources\application.yml
+  port: -1

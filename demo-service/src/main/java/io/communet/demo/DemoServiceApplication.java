@@ -22,9 +22,7 @@ public class DemoServiceApplication implements CommandLineRunner {
     private String dubboName;
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(DemoServiceApplication.class,
-                "classpath:/spring/dubbo-provider.xml",
-                "classpath:/spring/dubbo-consumer.xml");
+        SpringApplication application = new SpringApplication(DemoServiceApplication.class);
         application.run(args);
     }
 
