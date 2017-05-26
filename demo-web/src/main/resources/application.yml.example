@@ -20,3 +20,8 @@ spring:
 # mybatis
 mybatis:
   configLocation: classpath:mybatis-config.xml
+
+dubbo:
+  name: demo-web
+  registry: zookeeper://127.0.0.1:2181
+  port: -1
