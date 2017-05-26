@@ -5,3 +5,11 @@ dubbo:
   name: demo-service
   registry: zookeeper://127.0.0.1:2181
   port: -1
+
+#MongoProperties
+spring.data.mongodb:
+  host: localhost
+  port: 27017
+  database: demo
+ # username:
+ # password:

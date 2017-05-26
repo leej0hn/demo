@@ -8,7 +8,7 @@
 	<dubbo:application name="dubbo-consumer" logger="slf4j"/>
 	
 	<dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>
-	
+
 	
 	<dubbo:reference  version="1.0.0" id="testService"  	timeout="10000" interface="io.communet.demo.service.TestService" check="false" retries="0" />
 </beans>

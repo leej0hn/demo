@@ -1,10 +1,12 @@
 package io.communet.demo;
 
+import io.communet.demo.persistence.mongo.repository.impl.SimpleCustomerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -17,12 +19,15 @@ import java.util.concurrent.CountDownLatch;
  */
 @SpringBootApplication
 @Slf4j
-public class DemoServiceApplication implements CommandLineRunner {
+@EnableMongoRepositories(repositoryBaseClass = SimpleCustomerRepository.class)
+public class DemoServiceApplication  implements CommandLineRunner {
+
     @Value("${dubbo.name}")
     private String dubboName;
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(DemoServiceApplication.class);
+        SpringApplication application = new SpringApplication(DemoServiceApplication.class,
+                "classpath:/spring/dubbo-provider.xml","classpath:/spring/dubbo-consumer.xml");
         application.run(args);
     }
 
@@ -32,4 +37,5 @@ public class DemoServiceApplication implements CommandLineRunner {
         log.info("{} boot successfully", this.dubboName);
         countDownLatch.await();
     }
+
 }
