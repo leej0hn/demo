@@ -2,7 +2,9 @@ package io.communet.demo.web.controller;
 
 import io.communet.demo.common.exception.ServiceException;
 import io.communet.demo.common.vo.Response;
+import io.communet.demo.service.TestService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @RestController
 public class TestController {
+    @Autowired
+    private TestService testService;
 
     @Value("${web.ips:}")
     private String ips;
