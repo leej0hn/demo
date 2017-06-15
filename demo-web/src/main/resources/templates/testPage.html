@@ -21,6 +21,14 @@ a {
 </script>
 <body>
         <h2>测试变量：</h2>  <span th:text="${test}"></span>
+
+        <form method="POST" enctype="multipart/form-data" th:action="@{/api/file/upload}" >
+
+            文件：<input type="file" name="uploadFile" />
+            <br/>
+            <input type="submit" value="上传" />
+
+        </form>
 </body>
 
 </html>

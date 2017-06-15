@@ -3,15 +3,20 @@ package io.communet.demo.web.controller;
 import io.communet.demo.common.exception.ServiceException;
 import io.communet.demo.common.vo.Response;
 import io.communet.demo.service.TestService;
+import io.communet.demo.web.configuration.WebConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 /**
  * <p>function:
@@ -23,10 +28,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class TestController {
     @Autowired
+    private ResourceLoader resourceLoader;
+
+    @Autowired
     private TestService testService;
 
     @Value("${web.ips:}")
     private String ips;
+
+    @Autowired
+    private WebConfig config;
 
     @RequestMapping(value = "/api/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response index() {
@@ -44,4 +55,21 @@ public class TestController {
         throw new ServiceException("testException msg");
     }
 
+    @PostMapping("/api/file/upload")
+    public Response<String> fileUpload(@RequestParam("uploadFile") MultipartFile uploadFile) throws Exception{
+        if (uploadFile.isEmpty()) {
+            throw new ServiceException("uploadFile is null");
+        }
+        String fileName = uploadFile.getOriginalFilename();
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        String imageName = UUID.randomUUID().toString() + suffixName;
+        Files.copy(uploadFile.getInputStream(), Paths.get(config.getFileUploadPath(), imageName));
+        return Response.ok(imageName);
+    }
+
+    @GetMapping("/api/file/download/{id:.+}")
+    @ResponseBody
+    public ResponseEntity<?> fileDownload(@PathVariable String id) {
+        return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(config.getFileUploadPath(), id).toString()));
+    }
 }
