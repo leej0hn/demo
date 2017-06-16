@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>io.communet</groupId>
-            <artifactId>demo-common</artifactId>
+            <artifactId>demo-common-mongo</artifactId>
         </dependency>
 
         <!-- MongoDB -->
