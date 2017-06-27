@@ -62,7 +62,7 @@ public class WebLogAspect {
         }
         log.info("=======response after===========\n [ContentType: {}/{}]-[method: {}]-[sessionId: {}] \n [url: {}] \n [params: {}]-[postData: {}] \n [respons: {}].",
                 request.getContentType(), request.getCharacterEncoding(),request.getMethod(),request.getSession().getId(),
-                request.getRequestURL(),request.getQueryString(),postData.toString(),reponse.toString());
+                request.getRequestURL(),request.getQueryString(),postData.toString(),reponse == null?null:reponse.toString());
     }
 
 }
