@@ -78,6 +78,11 @@
                 <artifactId>demo-common-mongo</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.communet</groupId>
+                <artifactId>demo-common-neo4j</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.communet</groupId>
@@ -87,6 +92,11 @@
             <dependency>
                 <groupId>io.communet</groupId>
                 <artifactId>demo-persistence-mongo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.communet</groupId>
+                <artifactId>demo-persistence-neo4j</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

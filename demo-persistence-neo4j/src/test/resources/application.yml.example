@@ -1,0 +1,10 @@
+logging:
+  file: ${user.home}/logs/demo-neo4j-persistence.log
+  level.org.springframework.boot: INFO
+  level.org.springframework.test: INFO
+
+#neo4j Properties
+spring.data.neo4j:
+ uri: http://127.0.0.1:7474
+ username: neo4j
+ password: 123456
