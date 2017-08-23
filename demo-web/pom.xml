@@ -34,11 +34,6 @@
 
         <dependency>
             <groupId>io.communet</groupId>
-            <artifactId>demo-persistence</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.communet</groupId>
             <artifactId>demo-service-api</artifactId>
         </dependency>
 
