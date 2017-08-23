@@ -18,7 +18,7 @@
         <module>demo-persistence-mongo</module>
         <module>demo-persistence-neo4j</module>
         <module>demo-common-mongo</module>
-        <module>demo-commonj-neo4j</module>
+        <module>demo-common-neo4j</module>
     </modules>
 
     <name>demo</name>
