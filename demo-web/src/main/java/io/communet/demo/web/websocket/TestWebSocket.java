@@ -1,5 +1,7 @@
 package io.communet.demo.web.websocket;
 
+import com.google.common.base.Throwables;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -20,6 +22,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 @ServerEndpoint("/websocket")
 @Component
+@Slf4j
 public class TestWebSocket {
     private static int onlineCount = 0;
 
@@ -28,22 +31,25 @@ public class TestWebSocket {
     @OnOpen
     public void onOpen (Session session){
         Map<String, List<String>> requestParameterMap = session.getRequestParameterMap();
-        List<String> usernameList = requestParameterMap.get("username");
-        List<String> passwdList = requestParameterMap.get("passwd");
-        if( usernameList != null && passwdList != null ){
-            String username = usernameList.get(0);
-            String passwd = passwdList.get(0);
-            if( username != null && passwd != null && username.equals("1") && passwd.equals("2") ){
+        List<String> tokenList = requestParameterMap.get("token");
+        List<String> clientWxIdList = requestParameterMap.get("clientWxId");
+        String clientWxId = "";
+        if( tokenList != null  ){
+            String token = tokenList.get(0);
+            if( token != null && token.equals("b53a132adb7294e7c71771e60b4eaabe") ){
                 webSocketSet.add(this);
                 addOnlineCount();
-                System.out.println("有新链接加入!当前在线人数为" + getOnlineCount());
+                if( clientWxIdList != null ){
+                    clientWxId = clientWxIdList.get(0);
+                }
+                log.info("有新链接加入 ! " + " clientWxId : " + clientWxId + " ; 当前在线人数为" + getOnlineCount());
                 return;
             }
         }
         try {
             session.close();
         }catch (Exception e){
-            e.printStackTrace();
+            log.error(Throwables.getStackTraceAsString(e));
         }
     }
 
@@ -51,12 +57,12 @@ public class TestWebSocket {
     public void onClose (){
         webSocketSet.remove(this);
         subOnlineCount();
-        System.out.println("有一链接关闭!当前在线人数为" + getOnlineCount());
+        log.info("有一链接关闭!当前在线人数为" + getOnlineCount());
     }
 
     @OnMessage(maxMessageSize = 50000 )
     public void onMessage (String message, Session session) throws IOException {
-        System.out.println("来自客户端的消息:" + message);
+        log.info("来自客户端的消息:" + message);
     }
 
     public static synchronized  int getOnlineCount (){
