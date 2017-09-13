@@ -1,6 +1,7 @@
 package io.communet.demo.web.websocket;
 
 import com.google.common.base.Throwables;
+import io.communet.demo.web.utils.WebsocketUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,6 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * <p>function:
@@ -24,29 +24,36 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 @Slf4j
 public class TestWebSocket {
-    private static int onlineCount = 0;
 
-    private static CopyOnWriteArraySet<TestWebSocket> webSocketSet = new CopyOnWriteArraySet<>();
+
+    private String clientWxId;
 
     @OnOpen
     public void onOpen (Session session){
-        Map<String, List<String>> requestParameterMap = session.getRequestParameterMap();
-        List<String> tokenList = requestParameterMap.get("token");
-        List<String> clientWxIdList = requestParameterMap.get("clientWxId");
-        String clientWxId = "";
-        if( tokenList != null  ){
-            String token = tokenList.get(0);
-            if( token != null && token.equals("b53a132adb7294e7c71771e60b4eaabe") ){
-                webSocketSet.add(this);
-                addOnlineCount();
-                if( clientWxIdList != null ){
-                    clientWxId = clientWxIdList.get(0);
-                }
-                log.info("有新链接加入 ! " + " clientWxId : " + clientWxId + " ; 当前在线人数为" + getOnlineCount());
-                return;
-            }
-        }
         try {
+            Map<String, List<String>> requestParameterMap = session.getRequestParameterMap();
+            List<String> tokenList = requestParameterMap.get("token");
+            List<String> clientWxIdList = requestParameterMap.get("clientWxId");
+            String clientWxId = null ;
+            if( tokenList != null  ){
+                String token = tokenList.get(0);
+                if( token != null && token.equals("b53a132adb7294e7c71771e60b4eaabe") ){
+                    if( clientWxIdList != null ){
+                        clientWxId = clientWxIdList.get(0);
+                    }
+                    if( clientWxId != null && !clientWxId.equals("")){
+                        //踢掉相同的
+                        Session sessionOld = WebsocketUtil.get(clientWxId);
+                        if( sessionOld != null ){
+                            sessionOld.close();
+                        }
+                        this.clientWxId = clientWxId;
+                        WebsocketUtil.put(clientWxId,session);
+                        log.info("sessionId : " + session.getId() +  " clientWxId : " + clientWxId + "   有新链接加入 !  ; 当前在线人数为" + WebsocketUtil.size());
+                        return;
+                    }
+                }
+            }
             session.close();
         }catch (Exception e){
             log.error(Throwables.getStackTraceAsString(e));
@@ -54,32 +61,17 @@ public class TestWebSocket {
     }
 
     @OnClose
-    public void onClose (){
-        webSocketSet.remove(this);
-        subOnlineCount();
-        log.info("有一链接关闭!当前在线人数为" + getOnlineCount());
+    public void onClose (Session session){
+        WebsocketUtil.remove(clientWxId);
+        log.info("sessionId : " + session.getId() + "  clientWxId : " + clientWxId + "  有一链接关闭!当前在线人数为" + WebsocketUtil.size());
     }
 
     @OnMessage(maxMessageSize = 50000 )
     public void onMessage (String message, Session session) throws IOException {
-        log.info("来自客户端的消息:" + message);
+        log.info("sessionId : " + session.getId() + " clientWxId  : " + clientWxId + " 当前在线人数为" + WebsocketUtil.size() + "  来自客户端的消息:" + message);
     }
 
-    public static synchronized  int getOnlineCount (){
-        return TestWebSocket.onlineCount;
-    }
 
-    public static synchronized void addOnlineCount (){
-        TestWebSocket.onlineCount++;
-    }
-
-    public static synchronized void subOnlineCount (){
-        if( TestWebSocket.onlineCount <= 0 ){
-            TestWebSocket.onlineCount = 0;
-        }else {
-            TestWebSocket.onlineCount--;
-        }
-    }
 }
 /** android 客户端 代码
  使用 autobahn-0.5.0.jar包
