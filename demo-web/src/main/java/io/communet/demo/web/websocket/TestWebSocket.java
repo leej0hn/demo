@@ -2,13 +2,11 @@ package io.communet.demo.web.websocket;
 
 import com.google.common.base.Throwables;
 import io.communet.demo.web.utils.WebsocketUtil;
+import io.communet.demo.web.websocket.handler.TestMessageHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.List;
@@ -20,16 +18,18 @@ import java.util.Map;
  * <p>Date: 2017/9/12
  * <p>Version: 1.0
  */
-@ServerEndpoint("/websocket")
-@Component
 @Slf4j
-public class TestWebSocket {
+public class TestWebSocket extends Endpoint{
 
+    private final TestMessageHandler testMessageHandler;
 
-    private String clientWxId;
+    public TestWebSocket(TestMessageHandler testMessageHandler){
+        this.testMessageHandler = testMessageHandler;
+        log.info("TestWebSocket hashcode : " + this.hashCode());
+    }
 
-    @OnOpen
-    public void onOpen (Session session){
+    @Override
+    public void onOpen (Session session ,EndpointConfig endpointConfig){
         try {
             Map<String, List<String>> requestParameterMap = session.getRequestParameterMap();
             List<String> tokenList = requestParameterMap.get("token");
@@ -42,14 +42,9 @@ public class TestWebSocket {
                         clientWxId = clientWxIdList.get(0);
                     }
                     if( clientWxId != null && !clientWxId.equals("")){
-                        //踢掉相同的
-                        Session sessionOld = WebsocketUtil.get(clientWxId);
-                        if( sessionOld != null ){
-                            sessionOld.close();
-                        }
-                        this.clientWxId = clientWxId;
                         WebsocketUtil.put(clientWxId,session);
-                        log.info("sessionId : " + session.getId() +  " clientWxId : " + clientWxId + "   有新链接加入 !  ; 当前在线人数为" + WebsocketUtil.size());
+                        session.addMessageHandler(testMessageHandler);
+                        log.info("TestWebSocket onOpen hashcode : " + this.hashCode() + "  sessionId : " + session.getId() +  " clientWxId : " + clientWxId + "   有新链接加入 !  ; 当前在线人数为" + WebsocketUtil.size());
                         return;
                     }
                 }
@@ -60,15 +55,15 @@ public class TestWebSocket {
         }
     }
 
-    @OnClose
-    public void onClose (Session session){
-        WebsocketUtil.remove(clientWxId);
+    @Override
+    public void onClose (Session session,CloseReason closeReason){
+        String clientWxId = WebsocketUtil.remove(session);
         log.info("sessionId : " + session.getId() + "  clientWxId : " + clientWxId + "  有一链接关闭!当前在线人数为" + WebsocketUtil.size());
     }
 
     @OnMessage(maxMessageSize = 50000 )
     public void onMessage (String message, Session session) throws IOException {
-        log.info("sessionId : " + session.getId() + " clientWxId  : " + clientWxId + " 当前在线人数为" + WebsocketUtil.size() + "  来自客户端的消息:" + message);
+//        log.info("sessionId : " + session.getId() + " clientWxId  : " + clientWxId + " 当前在线人数为" + WebsocketUtil.size() + "  来自客户端的消息:" + message);
     }
 
 
