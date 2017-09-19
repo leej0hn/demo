@@ -85,6 +85,21 @@ public class SimpleCustomerRepository<T, ID extends Serializable> extends QueryD
     }
 
     @Override
+    public <S extends T> List<S> save(Iterable<S> list){
+        for (S entity : list) {
+            if( entity instanceof MongoBaseModel) {
+                if( ((MongoBaseModel) entity).getUpdatedAt() == null ){
+                    ((MongoBaseModel) entity).setUpdatedAt(new Date());
+                }
+                if( ((MongoBaseModel) entity).getCreatedAt() == null ){
+                    ((MongoBaseModel) entity).setCreatedAt(new Date());
+                }
+            }
+        }
+        return super.save(list);
+    }
+
+    @Override
     public long count(Query query){
         return this.mongoOperations.count(query,this.entityInformation.getJavaType());
     }
