@@ -1,6 +1,7 @@
 package io.communet.demo.web.controller;
 
 import io.communet.demo.common.exception.ServiceException;
+import io.communet.demo.common.model.TestModel;
 import io.communet.demo.common.vo.Response;
 import io.communet.demo.service.TestService;
 import io.communet.demo.web.configuration.WebConfig;
@@ -42,6 +43,18 @@ public class TestController {
     @RequestMapping(value = "/api/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response index() {
         return Response.ok("test");
+    }
+
+    /**
+     * 前端数据提交 Content-Type:application/json;
+     * body raw : {"name":"1","age":18}
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/api/testjson", method=RequestMethod.POST, consumes = "application/json")
+    public Response test(@RequestBody TestModel model){
+        log.info(model.toString());
+        return Response.ok("testjson");
     }
 
     @GetMapping("/page/test")
