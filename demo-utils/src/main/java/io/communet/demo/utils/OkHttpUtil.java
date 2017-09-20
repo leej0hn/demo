@@ -6,7 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +28,45 @@ public class OkHttpUtil {
                 .url(url)
                 .build();
         return resutl(request);
+    }
+
+    public static void downloadfile(String url,String savePath)  {
+        try {
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            Response response = client.newCall(request).execute();
+            InputStream inputStream = response.body().byteStream();
+            byte[] data = new byte[1024];
+            int len = 0;
+            FileOutputStream fileOutputStream = null;
+            try {
+                fileOutputStream = new FileOutputStream(savePath);
+                while ((len = inputStream.read(data)) != -1) {
+                    fileOutputStream.write(data, 0, len);
+                }
+            } catch (IOException e) {
+                logger.error(Throwables.getStackTraceAsString(e));
+            } finally {
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        logger.error(Throwables.getStackTraceAsString(e));
+                    }
+                }
+                if (fileOutputStream != null) {
+                    try {
+                        fileOutputStream.close();
+                    } catch (IOException e) {
+                        logger.error(Throwables.getStackTraceAsString(e));
+                    }
+                }
+            }
+        }catch (Exception e){
+            logger.error(Throwables.getStackTraceAsString(e));
+        }
     }
 
     public static String upload(byte[] content, String uploadUrl) throws IOException {
