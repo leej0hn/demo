@@ -179,8 +179,7 @@ public class ImagePHash {
 //        try {
 //            image1 = p.getHash(new FileInputStream(new File("E:/0.jpg")));
 //            image2 = p.getHash(new FileInputStream(new File("E:/1.jpg")));
-//            System.out.println("1:1 Score is " + p.distance(image1, image2));
-//
+//            System.out.println("1:1 Score is " + p.distance(image1, image2)); //大于10则不是同一样图片
 //        } catch (FileNotFoundException e) {
 //            e.printStackTrace();
 //        } catch (Exception e) {
