@@ -1,5 +1,7 @@
 package io.communet.demo.web.websocket.handler;
 
+import com.alibaba.fastjson.JSON;
+import io.communet.demo.WechatMsg;
 import io.communet.demo.service.TestService;
 import io.communet.demo.web.utils.WebsocketUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +24,10 @@ public class TestMessageHandler implements MessageHandler.Whole<String> {
 
     @Override
     public void onMessage(String message) {
-        log.info("TestMessageHandler hash : " + this.hashCode() + "  testService hashcode : " + testService.hashCode() + " 当前在线人数为" + WebsocketUtil.size() + "  来自客户端的消息:" + message);
+        WechatMsg wechatMsg = JSON.parseObject(message, WechatMsg.class);
+        if( !wechatMsg.getApiCode().equals("9999")){
+            log.info("TestMessageHandler hash : " + this.hashCode() + "  testService hashcode : " + testService.hashCode() + " 当前在线人数为" + WebsocketUtil.size() + "  来自客户端的消息:" + message);
+        }
     }
 
 }

@@ -1,6 +1,9 @@
 package io.communet.demo.web.websocket;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Throwables;
+import io.communet.demo.WechatMsg;
 import io.communet.demo.web.utils.WebsocketUtil;
 import io.communet.demo.web.websocket.handler.TestMessageHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -61,10 +64,6 @@ public class TestWebSocket extends Endpoint{
         log.info("sessionId : " + session.getId() + "  clientWxId : " + clientWxId + "  有一链接关闭!当前在线人数为" + WebsocketUtil.size());
     }
 
-    @OnMessage(maxMessageSize = 50000 )
-    public void onMessage (String message, Session session) throws IOException {
-//        log.info("sessionId : " + session.getId() + " clientWxId  : " + clientWxId + " 当前在线人数为" + WebsocketUtil.size() + "  来自客户端的消息:" + message);
-    }
 
 
 }

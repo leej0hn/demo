@@ -22,7 +22,7 @@ public class WebSocketConfig {
 
     @Bean
     public ServerEndpointRegistration wechatWebSocketSingleton() {
-        return new ServerEndpointRegistration("/wechat/websocket", new TestWebSocket(messageHandlerSingleton()));
+        return new ServerEndpointRegistration("/websocket-input", new TestWebSocket(messageHandlerSingleton()));
     }
 
     @Bean

@@ -1,11 +1,14 @@
 package io.communet.demo;
 
+import com.alibaba.fastjson.JSON;
+import io.communet.demo.web.utils.WebsocketUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.websocket.Session;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -30,6 +33,32 @@ public class DemoWebApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         log.info("{} boot successfully", this.dubboName);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    while (true) {
+                        try {
+                            Session session = WebsocketUtil.get("wxid_d7c1vhp6q1xv22");
+                            WechatMsg wechatMsg = new WechatMsg();
+                            wechatMsg.setClientId("8642802ab611607b89cad5d257d90a45");
+                            wechatMsg.setTalker("Lee_John");
+                            wechatMsg.setApiCode("9009");
+                            wechatMsg.setFileUrl("http://qzs-dev.oss-cn-shenzhen.aliyuncs.com/wechat-helper/207b18cd63c14ccba3302b311e506102.jpg");
+                            session.getBasicRemote().sendText(JSON.toJSONString(wechatMsg));
+                            Thread.sleep(20000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Thread.sleep(10000);
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        };
+//        new Thread(runnable).start();
         countDownLatch.await();
     }
 
