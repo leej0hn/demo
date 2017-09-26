@@ -43,9 +43,15 @@ public class DemoWebApplication implements CommandLineRunner {
                             Session session = WebsocketUtil.get("wxid_d7c1vhp6q1xv22");
                             WechatMsg wechatMsg = new WechatMsg();
                             wechatMsg.setClientId("8642802ab611607b89cad5d257d90a45");
-                            wechatMsg.setTalker("Lee_John");
-                            wechatMsg.setApiCode("9009");
-                            wechatMsg.setFileUrl("http://qzs-dev.oss-cn-shenzhen.aliyuncs.com/wechat-helper/207b18cd63c14ccba3302b311e506102.jpg");
+                            wechatMsg.setChatRoomId("6420656522@chatroom");
+//                            wechatMsg.setTalker("Lee_John");
+//                            wechatMsg.setApiCode("9007");
+//                            wechatMsg.setContent("999999");
+//                            wechatMsg.setApiCode("9009");
+//                            wechatMsg.setFileUrl("http://qzs-dev.oss-cn-shenzhen.aliyuncs.com/wechat-helper/207b18cd63c14ccba3302b311e506102.jpg");
+                            wechatMsg.setApiCode("9008");
+                            wechatMsg.setFileUrl("http://qzs-dev.oss-cn-shenzhen.aliyuncs.com/wechat-helper/d298bf4252f046dc86b2424fe31d4eea.amr");
+
                             session.getBasicRemote().sendText(JSON.toJSONString(wechatMsg));
                             Thread.sleep(20000);
                         } catch (Exception e) {
@@ -58,7 +64,7 @@ public class DemoWebApplication implements CommandLineRunner {
                 }
             }
         };
-//        new Thread(runnable).start();
+        new Thread(runnable).start();
         countDownLatch.await();
     }
 
