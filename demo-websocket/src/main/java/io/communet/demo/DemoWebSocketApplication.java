@@ -11,25 +11,25 @@ import java.util.concurrent.CountDownLatch;
 /**
  * <p>function:
  * <p>User: leejohn
- * <p>Date: 16/7/8
+ * <p>Date: 2017/09/27
  * <p>Version: 1.0
  */
 @SpringBootApplication
 @Slf4j
-public class DemoWebApplication implements CommandLineRunner {
+public class DemoWebSocketApplication implements CommandLineRunner {
 
-    @Value("${dubbo.name}")
-    private String dubboName;
+    @Value("${applicationName}")
+    private String applicationName;
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(DemoWebApplication.class);
+        SpringApplication application = new SpringApplication(DemoWebSocketApplication.class);
         application.run(args);
     }
 
     @Override
     public void run(String... args) throws Exception {
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        log.info("{} boot successfully", this.dubboName);
+        log.info("{} boot successfully", this.applicationName);
         countDownLatch.await();
     }
 

@@ -1,4 +1,4 @@
-package io.communet.demo;
+package io.communet.demo.websocket.dto;
 
 import java.io.Serializable;
 

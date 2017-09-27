@@ -1,0 +1,5 @@
+applicationName: demo-web-socket
+
+logging:
+  file: ${user.home}/logs/demo-web-socket.log
+server.port: 9000

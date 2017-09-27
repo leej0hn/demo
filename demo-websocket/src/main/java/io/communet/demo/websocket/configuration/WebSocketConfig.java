@@ -1,7 +1,7 @@
-package io.communet.demo.web.configuration;
+package io.communet.demo.websocket.configuration;
 
-import io.communet.demo.web.websocket.TestWebSocket;
-import io.communet.demo.web.websocket.handler.TestMessageHandler;
+import io.communet.demo.websocket.socket.TestMessageHandler;
+import io.communet.demo.websocket.socket.TestWebSocket;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;

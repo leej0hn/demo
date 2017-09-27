@@ -1,4 +1,4 @@
-package io.communet.demo.web.utils;
+package io.communet.demo.websocket.utils;
 
 import com.google.common.base.Throwables;
 import lombok.extern.slf4j.Slf4j;

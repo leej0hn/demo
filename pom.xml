@@ -19,6 +19,7 @@
         <module>demo-persistence-neo4j</module>
         <module>demo-common-mongo</module>
         <module>demo-common-neo4j</module>
+        <module>demo-websocket</module>
     </modules>
 
     <name>demo</name>
