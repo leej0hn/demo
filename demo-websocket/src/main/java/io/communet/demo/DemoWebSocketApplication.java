@@ -1,5 +1,6 @@
 package io.communet.demo;
 
+import io.communet.demo.websocket.thread.PushThread;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -30,6 +31,7 @@ public class DemoWebSocketApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         log.info("{} boot successfully", this.applicationName);
+//        new PushThread().start();
         countDownLatch.await();
     }
 

@@ -29,8 +29,10 @@ public class PushThread extends Thread {
 //                            wechatMsg.setContent("999999");
 //                            wechatMsg.setApiCode("9009");
 //                            wechatMsg.setFileUrl("http://qzs-dev.oss-cn-shenzhen.aliyuncs.com/wechat-helper/207b18cd63c14ccba3302b311e506102.jpg");
-                    wechatMsg.setApiCode("9008");
-                    wechatMsg.setFileUrl("http://qzs-dev.oss-cn-shenzhen.aliyuncs.com/wechat-helper/d298bf4252f046dc86b2424fe31d4eea.amr");
+//                    wechatMsg.setApiCode("9008");
+//                    wechatMsg.setFileUrl("http://qzs-dev.oss-cn-shenzhen.aliyuncs.com/wechat-helper/d298bf4252f046dc86b2424fe31d4eea.amr");
+                    wechatMsg.setApiCode("9010");
+                    wechatMsg.setFileUrl("http://www.hao123.com");
 
                     session.getBasicRemote().sendText(JSON.toJSONString(wechatMsg));
                     Thread.sleep(20000);
