@@ -1,6 +1,7 @@
 package io.communet.demo.websocket.socket;
 
 import com.alibaba.fastjson.JSON;
+import io.communet.demo.utils.Base64Util;
 import io.communet.demo.websocket.dto.WechatMsg;
 import io.communet.demo.websocket.utils.WebsocketUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ public class TestMessageHandler implements MessageHandler.Whole<String> {
         if( !wechatMsg.getApiCode().equals("9999")){
             log.info("TestMessageHandler hash : " + this.hashCode() + "  testService hashcode : " +  " 当前在线人数为" + WebsocketUtil.size() + "  来自客户端的消息:" + message);
         }
+        Base64Util.decoderBase64File(wechatMsg.getFile(),"E:\\file.jpg");
     }
 
 }
