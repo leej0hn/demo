@@ -40,7 +40,7 @@
         <commons-lang.version>2.6</commons-lang.version>
         <alibaba-fastjson.version>1.2.28</alibaba-fastjson.version>
         <httpclient.version>4.5.2</httpclient.version>
-        <jackson.version>2.7.0</jackson.version>
+        <jackson.version>2.9.0</jackson.version>
         <selenium-java.version>2.44.0</selenium-java.version>
         <phantomjsdriver.version>1.2.0</phantomjsdriver.version>
         <webCollector.version>2.32</webCollector.version>
@@ -228,6 +228,12 @@
 
             <!-- utils -->
             <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.jodd</groupId>
                 <artifactId>jodd-core</artifactId>
                 <version>${jodd.version}</version>
@@ -280,13 +286,23 @@
                 <artifactId>jedis</artifactId>
                 <version>${redis.version}</version>
             </dependency>
-
-            <!-- alibaba utils -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-guava</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- alibaba utils -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
