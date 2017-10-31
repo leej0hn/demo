@@ -36,7 +36,7 @@ public class TestWebSocket extends Endpoint{
             String clientWxId = null ;
             if( tokenList != null  ){
                 String token = tokenList.get(0);
-                if( token != null && token.equals("b53a132adb7294e7c71771e60b4eaabe") ){
+                if( token != null && token.equals("a74446e586a4e856d2e5b22cea9756e0") ){
                     if( clientWxIdList != null ){
                         clientWxId = clientWxIdList.get(0);
                     }

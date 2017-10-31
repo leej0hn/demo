@@ -1,10 +1,14 @@
 package io.communet.demo.websocket.thread;
 
 import com.alibaba.fastjson.JSON;
+import io.communet.demo.websocket.dto.ContactModel;
+import io.communet.demo.websocket.dto.ContactMsg;
 import io.communet.demo.websocket.dto.WechatMsg;
 import io.communet.demo.websocket.utils.WebsocketUtil;
 
 import javax.websocket.Session;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>function:
@@ -45,5 +49,19 @@ public class PushThread extends Thread {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void loguetownSend(Session session) throws Exception{
+        ContactModel contactModel = new ContactModel();
+        contactModel.setName("18613052002");
+        contactModel.setPhone(18613052002L);
+        List<ContactModel> contactModels = new ArrayList<>();
+        contactModels.add(contactModel);
+        ContactMsg contactMsg = new ContactMsg();
+        contactMsg.setApiCode("9201");
+        contactMsg.setClientId("8642802ab611607b89cad5d257d90a45");
+        contactMsg.setBatchId("0001");
+        contactMsg.setContactModels(contactModels);
+        session.getBasicRemote().sendText(JSON.toJSONString(contactMsg));
     }
 }
