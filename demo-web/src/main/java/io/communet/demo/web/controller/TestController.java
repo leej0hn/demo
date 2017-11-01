@@ -3,6 +3,7 @@ package io.communet.demo.web.controller;
 import io.communet.demo.common.exception.ServiceException;
 import io.communet.demo.common.model.TestModel;
 import io.communet.demo.common.vo.Response;
+import io.communet.demo.kafka.MsgProducer;
 import io.communet.demo.service.TestService;
 import io.communet.demo.web.configuration.WebConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,9 @@ public class TestController {
     @Autowired
     private TestService testService;
 
+    @Autowired
+    private MsgProducer msgProducer;
+
     @Value("${web.ips:}")
     private String ips;
 
@@ -43,6 +47,12 @@ public class TestController {
     @RequestMapping(value = "/api/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response index() {
         return Response.ok("test");
+    }
+
+    @RequestMapping(value = "/api/test/kafka", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response kafka() {
+        msgProducer.send();
+        return Response.ok("test kafka");
     }
 
     /**

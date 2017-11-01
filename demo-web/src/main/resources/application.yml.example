@@ -38,3 +38,16 @@ spring.http.multipart:
   max-file-size: 1Mb
   # 最大支持请求大小
   max-request-size: 10Mb
+
+#kafka
+spring.kafka:
+# 指定kafka 代理地址，可以多个
+  bootstrap-servers: 192.168.0.19:9092
+# 指定默认消费者group id
+  consumer.group-id: commuent-group
+# 指定默认topic id
+  template.default-topic: communet-topic
+# 指定listener 容器中的线程数，用于提高并发量
+  listener.concurrency: 3
+# 每次批量发送消息的数量
+  producer.batch-size: 1000
