@@ -20,6 +20,7 @@
         <module>demo-common-mongo</module>
         <module>demo-common-neo4j</module>
         <module>demo-websocket</module>
+        <module>demo-hbase</module>
     </modules>
 
     <name>demo</name>

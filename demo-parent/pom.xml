@@ -60,6 +60,8 @@
 
         <!-- 操作excel表格工具 -->
         <apache-poi.version>3.16</apache-poi.version>
+
+        <hbase-hadoop.version>0.98.9-hadoop2</hbase-hadoop.version>
     </properties>
 
     <dependencies>
@@ -126,6 +128,12 @@
             <dependency>
                 <groupId>io.communet</groupId>
                 <artifactId>demo-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.communet</groupId>
+                <artifactId>demo-hbase</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -346,6 +354,18 @@
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml-schemas</artifactId>
                 <version>${apache-poi.version}</version>
+            </dependency>
+
+            <!-- hbase -->
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-client</artifactId>
+                <version>${hbase-hadoop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-server</artifactId>
+                <version>${hbase-hadoop.version}</version>
             </dependency>
 
         </dependencies>

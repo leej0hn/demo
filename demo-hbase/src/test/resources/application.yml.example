@@ -1,0 +1,6 @@
+logging:
+  file: ${user.home}/logs/demo-hbase.log
+
+hbaseProp:
+  quorum: cdh00
+  clientport: 2181
