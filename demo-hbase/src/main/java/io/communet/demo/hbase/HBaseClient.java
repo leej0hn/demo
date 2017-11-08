@@ -27,9 +27,24 @@ public class HBaseClient {
     @Value("${hbaseProp.clientport:}")
     private String CLIENTPORT ;
     // spring boot 扫描时与Configuration类冲突 ，不能出现在类变量里面
-//    private Configuration conf = null;
-    private HConnection conn = null;
-    private HBaseAdmin admin = null;
+    private static Configuration conf = null;
+    private static HConnection conn = null;
+    private static HBaseAdmin admin = null;
+
+
+    /**
+     * 获取全局唯一的Configuration实例
+     * @return
+     */
+    public static Configuration getConfiguration(String quorum ,String clientPort){
+        if(conf == null){
+            conf =  HBaseConfiguration.create();
+            conf.set("hbase.zookeeper.quorum", quorum);
+            conf.set("hbase.zookeeper.property.clientPort", clientPort);
+//            conf.set("hbase.zookeeper.master", "cdh02:60000");
+        }
+        return conf;
+    }
 
     /**
      * 获取全局唯一的HConnection实例
@@ -39,11 +54,7 @@ public class HBaseClient {
     public HConnection getHConnection(){
         if(conn == null){
             try {
-                Configuration  conf =  HBaseConfiguration.create();
-                conf.set("hbase.zookeeper.quorum", QUORUM);
-                conf.set("hbase.zookeeper.property.clientPort", CLIENTPORT);
-//            conf.set("hbase.zookeeper.master", "cdh02:60000");
-                conn = HConnectionManager.createConnection(conf);
+                conn = HConnectionManager.createConnection(getConfiguration(QUORUM,CLIENTPORT));
             } catch (IOException e) {
                 log.error(e.getMessage());
             }
