@@ -27,9 +27,9 @@ public class HBaseClient {
     @Value("${hbaseProp.clientport:}")
     private String CLIENTPORT ;
     // spring boot 扫描时与Configuration类冲突 ，不能出现在类变量里面
-//    private static Configuration conf = null;
-    private static HConnection conn = null;
-    private static HBaseAdmin admin = null;
+//    private Configuration conf = null;
+    private HConnection conn = null;
+    private HBaseAdmin admin = null;
 
     /**
      * 获取全局唯一的HConnection实例
