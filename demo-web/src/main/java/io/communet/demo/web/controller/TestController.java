@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -42,6 +44,10 @@ public class TestController {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
 
     @Value("${web.ips:}")
     private String ips;
@@ -110,6 +116,13 @@ public class TestController {
     @GetMapping("/api/read/redis")
     public Response<String> testReadRedis(){
         String value = stringRedisTemplate.opsForValue().get("test");
+        System.out.println("test : " + value);
+        Set<String> obj = (Set)redisTemplate.opsForValue().get("ccrm:compid_userid_appid:10_136_109");
+        if( obj != null ){
+            System.out.println(obj.size());
+        }
+        System.out.println("stringRedisTemplate hashcode : " + stringRedisTemplate.hashCode() );
+        System.out.println("redisTemplate hashcode : " + redisTemplate.hashCode() );
         return Response.ok(value);
     }
 }
