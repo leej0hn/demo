@@ -10,11 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -37,6 +39,9 @@ public class TestController {
 
     @Autowired
     private MsgProducer msgProducer;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Value("${web.ips:}")
     private String ips;
@@ -94,5 +99,17 @@ public class TestController {
     @ResponseBody
     public ResponseEntity<?> fileDownload(@PathVariable String id) {
         return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(config.getFileUploadPath(), id).toString()));
+    }
+
+    @GetMapping("/api/write/redis")
+    public Response<Boolean> testWriteRedis(){
+        stringRedisTemplate.opsForValue().set("test", "test123");
+        return Response.ok(true);
+    }
+
+    @GetMapping("/api/read/redis")
+    public Response<String> testReadRedis(){
+        String value = stringRedisTemplate.opsForValue().get("test");
+        return Response.ok(value);
     }
 }

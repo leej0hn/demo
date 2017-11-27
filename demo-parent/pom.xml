@@ -173,9 +173,10 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-redis</artifactId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -297,12 +298,13 @@
                 <artifactId>druid</artifactId>
                 <version>${alibaba-druid.version}</version>
             </dependency>
-
+            <!--
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${redis.version}</version>
             </dependency>
+            -->
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-guava</artifactId>
