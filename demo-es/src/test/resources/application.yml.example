@@ -1,0 +1,15 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: comunet-es-cluster-test
+      repositories:
+        enabled: true
+      cluster-nodes: 192.168.0.200:9300
+      properties:
+        path:
+          logs: ./elasticsearch/log
+          data: ./elasticsearch/data
+
+
+logging:
+  file: ${user.home}/logs/demo/es.log
