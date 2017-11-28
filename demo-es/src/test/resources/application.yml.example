@@ -1,10 +1,10 @@
 spring:
   data:
     elasticsearch:
-      cluster-name: comunet-es-cluster-test
+      cluster-name: elasticsearch
       repositories:
         enabled: true
-      cluster-nodes: 192.168.0.200:9300
+      cluster-nodes: 127.0.0.1:9300
       properties:
         path:
           logs: ./elasticsearch/log

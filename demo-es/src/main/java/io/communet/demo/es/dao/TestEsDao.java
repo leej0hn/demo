@@ -1,6 +1,6 @@
 package io.communet.demo.es.dao;
 
-import io.communet.demo.common.model.es.WechatArticleEsModel;
+import io.communet.demo.common.model.es.TestUserEsModel;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  * <p>Version: 1.0
  */
 @Repository
-public interface TestEsDao extends ElasticsearchRepository<WechatArticleEsModel, String> {
+public interface TestEsDao extends ElasticsearchRepository<TestUserEsModel, String> {
 }
