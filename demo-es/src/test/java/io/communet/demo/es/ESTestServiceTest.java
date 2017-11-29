@@ -78,12 +78,12 @@ public class ESTestServiceTest extends BaseDaoTest {
             @Override
             public Aggregations extract(SearchResponse response) {
                 Aggregations aggregations = response.getAggregations();
-                InternalTerms createTimeInternalTerms = (InternalTerms) aggregations.asList().get(0);
-                List<Terms.Bucket> createTimeBuckets = createTimeInternalTerms.getBuckets();
-                for (Terms.Bucket createTimeBucket : createTimeBuckets) {
-                    System.out.println("key :　" + createTimeBucket.getKeyAsString());
-                    System.out.println("docCount :　" + createTimeBucket.getDocCount());
-                    System.out.println("sum_age :　" + ((InternalSum)createTimeBucket.getAggregations().getProperty("sum_age")).getValue());
+                InternalTerms internalTerms = (InternalTerms) aggregations.asList().get(0);
+                List<Terms.Bucket> buckets = internalTerms.getBuckets();
+                for (Terms.Bucket buket : buckets) {
+                    System.out.println("key :　" + buket.getKeyAsString());
+                    System.out.println("docCount :　" + buket.getDocCount());
+                    System.out.println("sum_age :　" + ((InternalSum)buket.getAggregations().getProperty("sum_age")).getValue());
                 }
                 return  response.getAggregations();
             }
