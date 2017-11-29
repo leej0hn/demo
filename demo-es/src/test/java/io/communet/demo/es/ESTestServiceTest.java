@@ -3,6 +3,8 @@ package io.communet.demo.es;
 import io.communet.demo.common.model.es.TestUserEsModel;
 import io.communet.demo.es.dao.TestEsDao;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.InternalTerms;
@@ -20,6 +22,8 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
 import java.util.List;
+
+import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 
 
 /**
@@ -55,15 +59,19 @@ public class ESTestServiceTest extends BaseDaoTest {
     @Test
     public void testAggsFind(){
         Pageable pageable = new PageRequest(0,1);
+        BoolQueryBuilder boolQueryBuilder = boolQuery();
+        //类似于in查询
+        boolQueryBuilder.should(QueryBuilders.matchQuery("name","LeeJohn" ));
+        boolQueryBuilder.should(QueryBuilders.matchQuery("name","Cheer" ));
         TermsBuilder termsBuilder = AggregationBuilders.terms("term_subject").field("subject")
                 .subAggregation(AggregationBuilders.sum("sum_age").field("age"));
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-//                .withQuery(boolQueryBuilder)
+                .withQuery(boolQueryBuilder)
                 .addAggregation(termsBuilder)
                 .withPageable(pageable)
                 .build();
 
-//        System.out.println(searchQuery.getQuery().toString());
+        System.out.println(searchQuery.getQuery().toString());
         Page<TestUserEsModel> models = testEsDao.search(searchQuery);
         System.out.println(models.getContent());
         Aggregations aggregations = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Aggregations>(){
