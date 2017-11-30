@@ -23,6 +23,7 @@
         <module>demo-hbase</module>
         <module>demo-es</module>
         <module>demo-common-es</module>
+        <module>demo-quartz</module>
     </modules>
 
     <name>demo</name>
