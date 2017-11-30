@@ -1,9 +1,9 @@
 package io.communet.demo.quartz.configuration.core;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
-
-import javax.annotation.Resource;
 
 /**
  * <p>function: 同一任务多个调度时间
@@ -14,7 +14,8 @@ import javax.annotation.Resource;
 @Configuration
 public class QuartzImplConfiguration extends QuartzConfiguration{
 
-    @Resource(name = "testManyTaskCronTrigger")
+    @Autowired
+    @Qualifier("testManyTaskCronTrigger")
     CronTriggerFactoryBean[] testManyTaskCronTrigger;
 
     @Override

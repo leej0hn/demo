@@ -4,12 +4,12 @@ import io.communet.demo.quartz.task.TestManyTask;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobDetail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
 
-import javax.annotation.Resource;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,8 @@ public class TestManyQuartz {
 
     // CronTrigger
     @Bean(name = "testManyTaskCronTrigger" )
-    @Resource(name = "testManyTaskJobDetail")
+    @Autowired
+    @Qualifier("testManyTaskJobDetail")
     public CronTriggerFactoryBean[] testOneTaskCronTrigger(JobDetail testManyTaskJobDetail) throws ParseException {
         log.info( "CronTriggerFactoryBean.JobDetail.testManyTaskJobDetail. hashcode : " + testManyTaskJobDetail.hashCode() ) ;
         List<CronTriggerFactoryBean> triggers = new ArrayList<CronTriggerFactoryBean>();
