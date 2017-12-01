@@ -19,7 +19,7 @@ public class TestModelMapperTest extends BaseDaoTest {
     public void test() throws Exception{
         TestModel model = new TestModel();
         model.setAge(18);
-        model.setName("Lee John");
+        model.setName("JackQ");
         mapper.insert(model);
     }
 }
