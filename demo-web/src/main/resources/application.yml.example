@@ -64,3 +64,6 @@ spring.redis:
   max-wait: -1
   pool.max-idle: 8
   pool.min-idle: 0
+
+# 调试信息 /autoconfig 查看配置信息 /beans 查询容器中所以的bean
+management.security.enabled: false
