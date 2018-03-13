@@ -1,0 +1,4 @@
+logging:
+  file: ${user.home}/logs/demo-scheduled.log
+
+spring.application.name: demo-scheduled

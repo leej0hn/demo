@@ -24,6 +24,7 @@
         <module>demo-es</module>
         <module>demo-common-es</module>
         <module>demo-quartz</module>
+        <module>demo-scheduled</module>
     </modules>
 
     <name>demo</name>
