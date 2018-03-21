@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>测试页面</title>
+
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" href="../static/favicon.ico" />
+    <script th:src="@{/assets/js/jquery.min.js}" src="../static/assets/js/jquery.min.js"></script>
+    <script th:src="@{/assets/js/sockjs.min.js}" src="../static/assets/js/sockjs.min.js"></script>
+    <script th:src="@{/assets/js/stomp.min.js}" src="../static/assets/js/stomp.min.js"></script>
+    <script>
+        $(function() {
+            alert("hello");
+            function init(){
+                let stompClient = null;
+                var socket = new SockJS('http://192.168.0.19:9000/ichater/wxWs');
+                stompClient = Stomp.over(socket);
+                stompClient.connect({
+                    roomId: 'roomid-test'
+                }, function (frame) {
+                    stompClient.subscribe('/ichater/wxWs/getRoomMsg', function (greeting) {
+                        alert(greeting);
+                    });
+                    stompClient.subscribe('/ichater/wxWs/getPersonalMsg', function (greeting) {
+                        alert(greeting);
+                    });
+                });
+            }
+
+            init();
+        });
+    </script>
+    <script th:inline="javascript">
+        var openid = /*[[${test}]]*/;
+    </script>
+</head>
+
+<style type="text/css">
+body,
+html,
+a {
+    width: 100%;
+    height: 100%;
+}
+</style>
+
+
+<script >
+
+</script>
+
+<body>
+    <h2>测试变量：</h2>  <span th:text="${test}"></span>
+</body>
+
+</html>

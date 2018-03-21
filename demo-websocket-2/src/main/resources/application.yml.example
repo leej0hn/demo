@@ -1,0 +1,7 @@
+applicationName: demo-web-socket-2
+
+logging:
+  file: ${user.home}/logs/demo-web-socket-2.log
+server.port: 9000
+
+spring.thymeleaf.cache: false

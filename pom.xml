@@ -25,6 +25,7 @@
         <module>demo-common-es</module>
         <module>demo-quartz</module>
         <module>demo-scheduled</module>
+        <module>demo-websocket-2</module>
     </modules>
 
     <name>demo</name>
