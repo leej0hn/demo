@@ -37,7 +37,7 @@ public class WebsocketConnectListener implements ApplicationListener<SessionConn
             String sessionId = sha.getSessionId();
             //注册sessionId
             socketMap.put(roomId, sessionId);
-            log.info("roomId : " + roomId + " ; " + " sessionId : " + sessionId);
+            log.info("【connect】roomId : " + roomId + " ; " + " sessionId : " + sessionId);
         }
     }
 }

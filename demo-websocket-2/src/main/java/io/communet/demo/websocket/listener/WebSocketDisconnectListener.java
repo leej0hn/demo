@@ -26,7 +26,7 @@ public class WebSocketDisconnectListener implements ApplicationListener<SessionD
         StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
         //获取SessionId
         String sessionId = sha.getSessionId();
-        log.info(" sessionId : " + sessionId);
+        log.info("【disconnect】 sessionId : " + sessionId);
         //sessionId获取roomId
         String roomId = socketMap.get(sessionId);
         //如果roomId不为空，则移除sessionId
