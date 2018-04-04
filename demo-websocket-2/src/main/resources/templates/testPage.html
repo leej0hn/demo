@@ -16,7 +16,7 @@
             alert("hello");
             function init(){
                 let stompClient = null;
-                var socket = new SockJS('http://192.168.0.19:9000/ichater/wxWs');
+                var socket = new SockJS('http://localhost:9000/ichater/wxWs');
                 stompClient = Stomp.over(socket);
                 stompClient.connect({
                     roomId: 'roomid-test'
