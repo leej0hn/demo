@@ -34,6 +34,17 @@ public class FileUtils {
            file.mkdirs();
         }
     }
+    public static File createFileIsNotExists(String path){
+        File file = new File(path);
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        }catch (IOException ioe){
+            log.error("新建文件出错 : " + ioe.getMessage());
+        }
+        return file;
+    }
 
     public static void deleteAllFilesOfDir(File path) {
         if (!path.exists()) {
