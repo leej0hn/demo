@@ -165,4 +165,59 @@ public class OkHttpUtil {
         return resutl;
     }
 
+    public static void uploadAsy(String uploadUrl,String fileName ,File file,Map<String,String> params,Callback responseCallback){
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart(fileName , file.getName(), fileBody);
+        if( params != null && params.size() > 0 ) {
+            for (String key : params.keySet()) {
+                builder.addFormDataPart(key, params.get(key));
+            }
+        }
+        Request request = new Request.Builder()
+                .url(uploadUrl)
+                .post(builder.build())
+                .build();
+        resultAsy(request,responseCallback);
+    }
+
+    public static void postFormAsy(String url,Map<String,String> params,Request request,Callback responseCallback){
+        MultipartBody.Builder builder=  new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if( params != null && params.size() > 0 ) {
+            for (String key : params.keySet()) {
+                builder.addFormDataPart(key, params.get(key));
+            }
+        }
+        resultAsy(request,responseCallback);
+    }
+
+    public static void postFormAsy(String url,Map<String,String> params,Callback responseCallback){
+        MultipartBody.Builder builder=  new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if( params != null && params.size() > 0 ) {
+            for (String key : params.keySet()) {
+                builder.addFormDataPart(key, params.get(key));
+            }
+        }
+        Request request = new Request.Builder()
+                .url(url)
+                .post(builder.build())
+                .build();
+        resultAsy(request,responseCallback);
+    }
+
+    public static void postJsonAsy(String url,String jsonBody,String token,Callback responseCallback){
+        RequestBody body = RequestBody.create(JSON, jsonBody);
+        Request request = new Request.Builder()
+                .addHeader("token_header",token)
+                .url(url)
+                .post(body)
+                .build();
+        resultAsy(request,responseCallback);
+    }
+
+    private static void resultAsy(Request request,Callback responseCallback){
+        client.newCall(request).enqueue(responseCallback);
+    }
+
+
+
 }
