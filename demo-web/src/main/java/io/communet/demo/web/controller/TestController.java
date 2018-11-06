@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>function:
@@ -125,4 +126,17 @@ public class TestController {
         System.out.println("redisTemplate hashcode : " + redisTemplate.hashCode() );
         return Response.ok(value);
     }
+
+    @GetMapping("/api/write/redis/expire")
+    public Response testWriteRedisExpire(){
+        stringRedisTemplate.opsForValue().set("testT","ppp",10,TimeUnit.SECONDS);
+        return Response.ok();
+    }
+
+    @GetMapping("/api/read/redis/expire")
+    public Response testGetRedisExpire(){
+        String testT = stringRedisTemplate.opsForValue().get("testT");
+        return Response.ok(testT);
+    }
+
 }
