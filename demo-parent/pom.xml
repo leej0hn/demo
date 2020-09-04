@@ -63,7 +63,7 @@
 
         <hbase-hadoop.version>0.98.9-hadoop2</hbase-hadoop.version>
 
-        <quartz.version>2.3.0</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
     </properties>
 
     <dependencies>
