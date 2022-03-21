@@ -22,7 +22,7 @@
         -->
         <spring-kafka.version>1.3.0.RELEASE</spring-kafka.version>
         <zkclient.version>0.1</zkclient.version>
-        <dubbo.version>2.5.3</dubbo.version>
+        <dubbo.version>2.6.9</dubbo.version>
         <hikari.version>2.4.3</hikari.version>
         <servlet-api.version>2.5</servlet-api.version>
         <qrgen.version>1.3</qrgen.version>
