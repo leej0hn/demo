@@ -59,7 +59,7 @@
         <redis.version>2.8.2</redis.version>
 
         <!-- 操作excel表格工具 -->
-        <apache-poi.version>3.16</apache-poi.version>
+        <apache-poi.version>4.1.1</apache-poi.version>
 
         <hbase-hadoop.version>0.98.9-hadoop2</hbase-hadoop.version>
 
