@@ -35,7 +35,7 @@
         <jieba.version>1.0.2</jieba.version>
         <jsoup.version>1.7.3</jsoup.version>
         <apache-commons-lang3.version>3.1</apache-commons-lang3.version>
-        <commons-collections.version>3.2.1</commons-collections.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
         <apache-commons-io.version>1.3.2</apache-commons-io.version>
         <apache-commons-codec.version>1.10</apache-commons-codec.version>
         <commons-lang.version>2.6</commons-lang.version>
