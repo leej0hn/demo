@@ -41,7 +41,7 @@
         <commons-lang.version>2.6</commons-lang.version>
         <alibaba-fastjson.version>1.2.28</alibaba-fastjson.version>
         <httpclient.version>4.5.2</httpclient.version>
-        <jackson.version>2.9.0</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <selenium-java.version>2.44.0</selenium-java.version>
         <phantomjsdriver.version>1.2.0</phantomjsdriver.version>
         <webCollector.version>2.32</webCollector.version>
